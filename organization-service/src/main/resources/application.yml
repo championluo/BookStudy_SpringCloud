@@ -1,0 +1,33 @@
+eureka:
+  instance:
+    #\u6CE8\u518C\u670D\u52A1\u7684ip,\u800C\u4E0D\u662F\u670D\u52A1\u5668\u540D\u79F0,\u4F5C\u8005\u4E2A\u4EBA\u610F\u89C1\u662F\u57FA\u4E8E\u4E91\u7684\u5FAE\u670D\u52A1\u5E94\u8BE5\u662F\u77ED\u6682\u7684\u548C\u65E0\u72B6\u6001\u7684,\u5B83\u4EEC\u53EF\u4EE5\u968F\u610F\u542F\u52A8\u548C\u5173\u95ED,ip\u5730\u5740\u66F4\u9002\u5408\u8FD9\u7C7B\u670D\u52A1
+    prefer-ip-address: true
+  client:
+    #\u672C\u670D\u52A1\u5411eureka\u670D\u52A1\u6CE8\u518C
+    register-with-eureka: true
+    #\u672C\u670D\u52A1\u7F13\u5B58\u6CE8\u518C\u8868
+    fetch-registry: true
+    #\u6CE8\u610F service-url\u662F\u4E00\u4E2Amap<String,string> \u6240\u4EE5\u53EF\u4EE5\u914D\u7F6E\u591A\u4E2A,\u4EE5\u914D\u5408eureka\u96C6\u7FA4\u4F7F\u7528
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8081
+
+#\u8FD9\u4E2A\u914D\u7F6E\u662F\u6307\u5B9Aactuotor\u66B4\u9732\u7684\u7AEF\u53E3,\u9ED8\u8BA4\u662Finfo\u548Chealth,\u8FD9\u91CC\u540C\u65F6\u66B4\u9732\u51FArefresh\u7AEF\u53E3
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info
+spring:
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+
+#获取token后的OAuth2回调配置
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8901/auth/user

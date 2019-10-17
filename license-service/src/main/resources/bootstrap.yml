@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: licensingservice  #需要和spring cloud config里面配置的名称相同
+  profiles:
+    active: default #默认环境配置
+  cloud:
+    config:
+      uri: http://localhost:8888  #spring cloud config service的url
