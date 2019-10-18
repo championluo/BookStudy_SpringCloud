@@ -23,7 +23,7 @@ public class AuthenticationServiceApplication {
         HashMap<String, Object> userInfo = new HashMap<>();
         //获取用户的验证信息(Authentication)
         userInfo.put("user",user.getUserAuthentication().getPrincipal());
-        //通过用户的验证信息获取用户授权(authority)
+        //通过用户的验证信息获取用户授权(authority) abc
         userInfo.put("authorities", AuthorityUtils.authorityListToSet(user.getUserAuthentication().getAuthorities()));
         return userInfo;
     }
