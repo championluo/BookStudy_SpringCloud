@@ -1,6 +1,10 @@
 package com.bookstudy.licenseservice;
 
+import com.bookstudy.licenseservice.config.ServiceConfig;
 import com.bookstudy.licenseservice.utils.UserContextInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
@@ -8,8 +12,10 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,11 +28,17 @@ import java.util.List;
 @EnableEurekaClient
 @EnableCircuitBreaker
 @EnableResourceServer
-//@EnableOAuth2Client
+@EnableOAuth2Client
+//@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class LicenseServiceApplication {
+
+    @Autowired
+    private ServiceConfig serviceConfig;
+    private static final Logger logger = LoggerFactory.getLogger(LicenseServiceApplication.class);
 
     @LoadBalanced
     @Bean
+    @Primary
     public RestTemplate getRestTemplate(){
         RestTemplate restTemplate = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = restTemplate.getInterceptors();

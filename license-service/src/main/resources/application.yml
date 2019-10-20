@@ -17,3 +17,9 @@ security:
      resource:
        userInfoUri: http://localhost:8901/auth/user
 #       loadBalanced: true
+
+server:
+  servlet:
+    session:
+      cookie:
+        name: OAUTH2SESSION

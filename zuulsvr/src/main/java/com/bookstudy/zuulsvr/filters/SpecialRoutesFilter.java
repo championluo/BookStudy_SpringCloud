@@ -87,7 +87,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
             );
 
             //跳转到新的路由上去
-            forworadToSpecialRoute(newRouteString);
+            forwardToSpecialRoute(newRouteString);
         }
 
         return null;
@@ -97,7 +97,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
      * 将原始请求的信息(request获取head,body等)添加到新的请求中
      * @param newRouteString
      */
-    private void forworadToSpecialRoute(String newRouteString) {
+    private void forwardToSpecialRoute(String newRouteString) {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 

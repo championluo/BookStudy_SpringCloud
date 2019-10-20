@@ -3,7 +3,6 @@ package com.bookstudy.authenticationservice.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 
-@Configuration
+//@Configuration
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -43,7 +42,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
         clients.inMemory()
                 .withClient("eagleeye")
-                .secret(passwordEncoder().encode("thisiseagleeye"))
+                .secret(passwordEncoder().encode("thisissecret"))
                 .authorizedGrantTypes("password", "refresh_token", "client_credentials")
                 .scopes("webclient", "mobileclient");
     }

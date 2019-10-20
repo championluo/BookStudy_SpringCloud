@@ -11,7 +11,14 @@ public class ServiceConfig {
     @Value("${example.property}")
     private String exampleProperty;
 
+    @Value("${signing.key}")
+    private String jwtKey;
+
     public String getExampleProperty(){
         return exampleProperty;
+    }
+
+    public String getJwtKey() {
+        return jwtKey;
     }
 }
