@@ -26,4 +26,15 @@ public class OrganizationController {
         organizationService.deleteOrg(organizationId);
     }
 
+    @RequestMapping(value="/{organizationId}",method = RequestMethod.POST)
+    public void saveOrganization(@RequestBody Organization org) {
+        organizationService.saveOrg( org );
+    }
+
+    @RequestMapping(value="/{organizationId}",method = RequestMethod.PUT)
+    public void updateOrganization( @PathVariable("organizationId") String orgId, @RequestBody Organization org) {
+        organizationService.updateOrg( org );
+
+    }
+
 }

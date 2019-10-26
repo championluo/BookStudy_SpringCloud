@@ -87,6 +87,7 @@ public class TrackingFilter extends ZuulFilter {
 
         RequestContext currentContext = RequestContext.getCurrentContext();
         String requestURI = currentContext.getRequest().getRequestURI();
+        System.out.println("Processing incoming request for "+requestURI);
         logger.debug("Processing incoming request for {}",requestURI);
         return null;
     }
