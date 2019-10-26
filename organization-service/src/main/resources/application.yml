@@ -25,9 +25,20 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+          #spring cloud stream 发送端配置
+  cloud:
+    stream:
+      binders:
+        output:
+          destination: orgChangeTopic
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: localhost  #告知kafka的网络位置
 
 #获取token后的OAuth2回调配置
 security:
   oauth2:
     resource:
       user-info-uri: http://localhost:8901/auth/user
+

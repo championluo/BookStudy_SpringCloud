@@ -47,7 +47,11 @@ public class LicenseService {
     @Autowired
     OrganizationRestTemplateClient organizationRestTemplateClient;
 
-    @HystrixCommand
+    @HystrixCommand(
+            commandProperties = {
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000")
+            }
+    )
      public Organization getOrganizationByOAuth2(String  organizationId){
          Organization org = organizationRestTemplateClient.getOrg(organizationId);
          return org;
