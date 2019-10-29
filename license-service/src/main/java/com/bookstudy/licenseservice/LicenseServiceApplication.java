@@ -1,7 +1,6 @@
 package com.bookstudy.licenseservice;
 
 import com.bookstudy.licenseservice.config.ServiceConfig;
-import com.bookstudy.licenseservice.event.model.OrganizationChangeModel;
 import com.bookstudy.licenseservice.utils.UserContextInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +11,6 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoR
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -33,7 +29,7 @@ import java.util.List;
 @EnableCircuitBreaker
 @EnableResourceServer
 @EnableOAuth2Client
-@EnableBinding(Sink.class)
+//@EnableBinding(Sink.class)
 //@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class LicenseServiceApplication {
 
@@ -41,11 +37,11 @@ public class LicenseServiceApplication {
     private ServiceConfig serviceConfig;
     private static final Logger logger = LoggerFactory.getLogger(LicenseServiceApplication.class);
 
-    @StreamListener(Sink.INPUT)
-    public void loggerSink(OrganizationChangeModel model){
-        logger.debug("Received an event for organization id :{}",model.getOrganizationId());
-        System.out.println("Received an event for organization id :"+model.getOrganizationId());
-    }
+//    @StreamListener(Sink.INPUT)
+//    public void loggerSink(OrganizationChangeModel model){
+//        logger.debug("Received an event for organization id :{}",model.getOrganizationId());
+//        System.out.println("Received an event for organization id :"+model.getOrganizationId());
+//    }
 
     @LoadBalanced
     @Bean

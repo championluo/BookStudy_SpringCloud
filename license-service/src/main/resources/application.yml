@@ -28,7 +28,7 @@ spring:
   cloud:
     stream:
       bindings:
-        input:
+        inboundOrgChanges:
           destination: orgChangeTopic
           content-type: application/json
           group: licensingGroup
@@ -36,3 +36,6 @@ spring:
         binder:
           brokers: localhost
           #zk-nodes: localhost
+  redis:
+    password:
+    timeout: 2000

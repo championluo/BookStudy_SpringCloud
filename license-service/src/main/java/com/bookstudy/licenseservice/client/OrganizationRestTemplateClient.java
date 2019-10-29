@@ -22,8 +22,8 @@ public class OrganizationRestTemplateClient {
 
         logger.debug("In Licensing Service.getOrganization: {}", UserContextHolder.getUserContext().getCorrelationId());
 
-//        ResponseEntity<Organization> entity = oAuth2RestTemplate.exchange("http://zuulservice/api/organizationservice/v1/organizations/{organizationId}",
-        ResponseEntity<Organization> entity = oAuth2RestTemplate.exchange("http://localhost:5555/api/organizationservice/v1/organizations/{organizationId}",
+        ResponseEntity<Organization> entity = oAuth2RestTemplate.exchange("http://zuulservice/api/organizationservice/v1/organizations/{organizationId}",
+//        ResponseEntity<Organization> entity = oAuth2RestTemplate.exchange("http://localhost:5555/api/organizationservice/v1/organizations/{organizationId}",
                 HttpMethod.GET, null, Organization.class, orgId);
 
         return entity.getBody();

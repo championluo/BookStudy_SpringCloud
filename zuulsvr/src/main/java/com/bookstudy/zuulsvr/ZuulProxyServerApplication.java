@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @SpringBootApplication
-@EnableZuulProxy //Zuul代理注解,服务发现默认使用Eureka6
+@EnableZuulProxy //Zuul代理注解,服务发现默认使用Eureka
 public class ZuulProxyServerApplication {
 
     @LoadBalanced

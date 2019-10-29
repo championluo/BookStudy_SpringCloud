@@ -1,6 +1,7 @@
 package com.bookstudy.licenseservice.services;
 
 import com.bookstudy.licenseservice.client.OrganizationDiscoveryClient;
+import com.bookstudy.licenseservice.client.OrganizationRedisClient;
 import com.bookstudy.licenseservice.client.OrganizationRestTemplateClient;
 import com.bookstudy.licenseservice.client.OrganizationRibbonClient;
 import com.bookstudy.licenseservice.config.ServiceConfig;
@@ -47,6 +48,9 @@ public class LicenseService {
     @Autowired
     OrganizationRestTemplateClient organizationRestTemplateClient;
 
+    @Autowired
+    OrganizationRedisClient redisClient;
+
     @HystrixCommand(
             commandProperties = {
                     @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "10000")
@@ -66,13 +70,23 @@ public class LicenseService {
 //        Organization org = getOrganization(organizationId);
 
         //测试Oauth2时调用Org服务的情况
-        Organization org  = getOrganizationByOAuth2(organizationId);
+//        Organization org  = getOrganizationByOAuth2(organizationId);
+
+        //测试redis 获取org
+        Organization org = getOrganizationByCache(organizationId);
 
         return licenseId1.withOrganizationName(org.getName()).withContactName(org.getContactName())
                 .withContactEmail(org.getContactEmail())
                 .withContactPhone(org.getContactPhone())
                 .withComment(config.getExampleProperty());
     }
+
+    @HystrixCommand
+    private Organization getOrganizationByCache(String organizationId) {
+        Organization cacheOrg = redisClient.getCacheOrg(organizationId);
+        return cacheOrg;
+    }
+
 
     @HystrixCommand
     private Organization getOrganization(String organizationId) {
